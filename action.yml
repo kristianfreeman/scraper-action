@@ -1,0 +1,14 @@
+name: 'Workers Web Scraper'
+description: 'Scrape URLs using web.scraper.workers.dev'
+inputs:
+  url:
+    description: 'URL to scrape'
+    required: true
+  selector:
+    description: 'Selector(s) to retrieve from URL'
+    required: true
+  test:
+    description: 'Validate the scraped content matches a known JSON payload'
+runs:
+  using: 'node12'
+  main: 'index.js'
