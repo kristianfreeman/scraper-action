@@ -11,4 +11,4 @@ inputs:
     description: 'Validate the scraped content matches a known JSON payload'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
