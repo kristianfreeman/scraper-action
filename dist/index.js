@@ -70,7 +70,7 @@ try {
     const selector = core.getInput('selector')
     const test = core.getInput('test') || ''
 
-    const req = new URL(url)
+    const req = new URL("https://web.scraper.workers.dev")
     req.searchParams.set('url', url)
     req.searchParams.set('selector', selector)
 
