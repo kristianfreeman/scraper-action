@@ -23,7 +23,7 @@ const testSingle = async ({ test, url, selector } = {}) => {
 
   console.log(`Scraper returned ${JSON.stringify(json)}`)
 
-  const { result } = json
+  let { result } = json
 
   console.log(`Result is ${result}`)
 
