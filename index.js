@@ -23,7 +23,7 @@ const testSingle = async ({ test, url, selector }) => {
     )
   }
 
-  if (result !== test) {
+  if (result != test) {
     core.setFailed(`Unable to validate ${selector} at ${url}, expected ${test} but got ${result}`)
   }
 }
