@@ -88,7 +88,7 @@ const testSingle = async ({ test, url, selector } = {}) => {
 
   const { result } = json
 
-  console.log(`Result is ${result}`)
+  console.log(`Result is ${result}, which is an ${typeof result}`)
 
   if (typeof result === 'array') {
     result = result[0]
