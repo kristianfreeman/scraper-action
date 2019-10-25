@@ -66,7 +66,7 @@ const fs = __webpack_require__(747)
 const core = __webpack_require__(470)
 const fetch = __webpack_require__(454)
 
-const testSingle = async ({ test, url, selector }) => {
+const testSingle = async ({ test, url, selector } = {}) => {
   const inputTest = test || core.getInput('test')
   const inputUrl = url || core.getInput('url')
   const inputSelector = selector || core.getInput('selector')
@@ -86,7 +86,7 @@ const testSingle = async ({ test, url, selector }) => {
     )
   }
 
-  if (result !== test) {
+  if (result != test) {
     core.setFailed(`Unable to validate ${selector} at ${url}, expected ${test} but got ${result}`)
   }
 }

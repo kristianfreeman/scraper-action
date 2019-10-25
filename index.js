@@ -3,7 +3,7 @@ const fs = require('fs')
 const core = require('@actions/core')
 const fetch = require('node-fetch')
 
-const testSingle = async ({ test, url, selector }) => {
+const testSingle = async ({ test, url, selector } = {}) => {
   const inputTest = test || core.getInput('test')
   const inputUrl = url || core.getInput('url')
   const inputSelector = selector || core.getInput('selector')
