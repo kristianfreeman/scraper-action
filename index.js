@@ -50,6 +50,7 @@ const testMultiple = file => {
 }
 
 try {
+  console.log(`Debug is ${DEBUG ? 'true' : 'false'}`)
   const makeRequest = async () => {
     const file = core.getInput('file')
 
