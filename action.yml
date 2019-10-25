@@ -9,6 +9,8 @@ inputs:
     required: true
   test:
     description: 'Validate the scraped content matches a known JSON payload'
+  file:
+    description: 'JSON file containing a list of URLs, selectors, and tests'
 runs:
   using: 'node12'
   main: 'dist/index.js'
