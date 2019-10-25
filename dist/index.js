@@ -70,15 +70,24 @@ try {
     const selector = core.getInput('selector')
     const test = core.getInput('test') || ''
 
-    const req = new URL("https://web.scraper.workers.dev")
+    const req = new URL('https://web.scraper.workers.dev')
     req.searchParams.set('url', url)
     req.searchParams.set('selector', selector)
 
     const res = await fetch(req)
-    const json = await res.json()
+    let { result } = await res.json()
 
-    console.log(test)
-    console.log(json)
+    if (typeof result === 'array') {
+      result = result[0]
+    } else if (typeof result === 'object') {
+      core.setFailed(
+        `Multi-selector tests aren't implemented yet! Try passing a simple single selector to this action.`,
+      )
+    }
+
+    if (result !== test) {
+      core.setFailed(`Unable to validate ${selector} at ${url}, expected ${test} but got ${result}`)
+    }
   }
 
   makeRequest()
