@@ -66,7 +66,7 @@ const fs = __webpack_require__(747)
 const core = __webpack_require__(470)
 const fetch = __webpack_require__(454)
 
-const DEBUG = core.getInput('debug') || false
+const DEBUG = core.getInput('debug') == 'true' || false
 const log = arg => DEBUG && core.debug(arg)
 
 const testSingle = async ({ test, url, selector } = {}) => {
@@ -114,19 +114,15 @@ const testMultiple = file => {
 
 try {
   console.log(`Debug is ${DEBUG ? 'true' : 'false'}`)
-  const makeRequest = async () => {
-    const file = core.getInput('file')
+  const file = core.getInput('file')
 
-    if (file) {
-      log(`File detected: ${file}. Testing multiple`)
-      testMultiple(file)
-    } else {
-      log(`Testing single`)
-      testSingle()
-    }
+  if (file) {
+    log(`File detected: ${file}. Testing multiple`)
+    testMultiple(file)
+  } else {
+    log(`Testing single`)
+    testSingle()
   }
-
-  makeRequest()
 } catch (error) {
   core.setFailed(error.message)
 }
