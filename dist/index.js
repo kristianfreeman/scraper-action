@@ -84,9 +84,11 @@ const testSingle = async ({ test, url, selector } = {}) => {
   const res = await fetch(req)
   let json = await res.json()
 
-  console.log(`Scraper returned ${json}`)
+  console.log(`Scraper returned ${JSON.stringify(json)}`)
 
   const { result } = json
+
+  console.log(`Result is ${result}`)
 
   if (typeof result === 'array') {
     result = result[0]
