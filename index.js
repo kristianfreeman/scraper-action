@@ -25,9 +25,9 @@ const testSingle = async ({ test, url, selector } = {}) => {
 
   const { result } = json
 
-  console.log(`Result is ${result}, which is an ${typeof result}`)
+  console.log(`Result is ${result}`)
 
-  if (typeof result === 'array') {
+  if (Array.isArray(result)) {
     result = result[0]
   } else if (typeof result === 'object') {
     core.setFailed(
