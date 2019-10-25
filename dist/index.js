@@ -66,28 +66,25 @@ const fs = __webpack_require__(747)
 const core = __webpack_require__(470)
 const fetch = __webpack_require__(454)
 
-const DEBUG = core.getInput('debug') == 'true' || false
-const log = arg => DEBUG && core.debug(arg)
-
 const testSingle = async ({ test, url, selector } = {}) => {
   const inputTest = test || core.getInput('test')
   const inputUrl = url || core.getInput('url')
   const inputSelector = selector || core.getInput('selector')
 
-  log(`Testing ${inputTest}`)
-  log(`URL is ${inputUrl}`)
-  log(`Selector is ${inputSelector}`)
+  console.log(`Testing ${inputTest}`)
+  console.log(`URL is ${inputUrl}`)
+  console.log(`Selector is ${inputSelector}`)
 
   const req = new URL('https://web.scraper.workers.dev')
   req.searchParams.set('url', url)
   req.searchParams.set('selector', selector)
 
-  log(`Making request...`)
+  console.log(`Making request...`)
 
   const res = await fetch(req)
   let { result } = await res.json()
 
-  log(`Scraper returned ${result}`)
+  console.log(`Scraper returned ${result}`)
 
   if (typeof result === 'array') {
     result = result[0]
@@ -97,7 +94,7 @@ const testSingle = async ({ test, url, selector } = {}) => {
     )
   }
 
-  log(`Comparing ${result} to ${test}`)
+  console.log(`Comparing ${result} to ${test}`)
 
   if (result != test) {
     core.setFailed(`Unable to validate ${selector} at ${url}, expected ${test} but got ${result}`)
@@ -106,21 +103,20 @@ const testSingle = async ({ test, url, selector } = {}) => {
 
 const testMultiple = file => {
   const data = fs.readFileSync(file, 'utf8')
-  log(`File ${file} read: ${data}`)
+  console.log(`File ${file} read: ${data}`)
   const tests = JSON.parse(data)
-  log(`Parsed as JSON: ${tests}`)
+  console.log(`Parsed as JSON: ${tests}`)
   tests.forEach(testSingle)
 }
 
 try {
-  console.log(`Debug is ${DEBUG ? 'true' : 'false'}`)
   const file = core.getInput('file')
 
   if (file) {
-    log(`File detected: ${file}. Testing multiple`)
+    console.log(`File detected: ${file}. Testing multiple`)
     testMultiple(file)
   } else {
-    log(`Testing single`)
+    console.log(`Testing single`)
     testSingle()
   }
 } catch (error) {

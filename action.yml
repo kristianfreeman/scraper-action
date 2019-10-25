@@ -9,8 +9,6 @@ inputs:
     description: 'Validate the scraped content matches a known JSON payload'
   file:
     description: 'JSON file containing a list of URLs, selectors, and tests'
-  debug:
-    description: 'With debug enabled, the action will increase the number of logs to help resolve any setup/config issues'
 runs:
   using: 'node12'
   main: 'dist/index.js'
