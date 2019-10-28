@@ -8,24 +8,14 @@ const testSingle = async ({ test, url, selector } = {}) => {
   const inputUrl = url || core.getInput('url')
   const inputSelector = selector || core.getInput('selector')
 
-  console.log(`Testing ${inputTest}`)
-  console.log(`URL is ${inputUrl}`)
-  console.log(`Selector is ${inputSelector}`)
-
   const req = new URL('https://web.scraper.workers.dev')
   req.searchParams.set('url', inputUrl)
   req.searchParams.set('selector', inputSelector)
 
-  console.log(`Making request...`)
-
   const res = await fetch(req)
   let json = await res.json()
 
-  console.log(`Scraper returned ${JSON.stringify(json)}`)
-
   let { result } = json
-
-  console.log(`Result is ${result}`)
 
   if (Array.isArray(result)) {
     result = result[0]
@@ -35,20 +25,16 @@ const testSingle = async ({ test, url, selector } = {}) => {
     )
   }
 
-  console.log(`Comparing ${result} to ${inputTest}`)
-
   if (result != inputTest) {
     core.setFailed(
-      `Unable to validate ${inputSelector} at ${inputUrl}, expected ${inputTest} but got ${result}`,
+      `Check failed: ${inputSelector} at ${inputUrl}, expected ${inputTest} but got ${result}`,
     )
   }
 }
 
 const testMultiple = file => {
   const data = fs.readFileSync(file, 'utf8')
-  console.log(`File ${file} read: ${data}`)
   const tests = JSON.parse(data)
-  console.log(`Parsed as JSON: ${tests}`)
   tests.forEach(testSingle)
 }
 
@@ -56,7 +42,6 @@ try {
   const file = core.getInput('file')
 
   if (file) {
-    console.log(`File detected: ${file}`)
     testMultiple(file)
   } else {
     testSingle()
