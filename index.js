@@ -25,7 +25,9 @@ const testSingle = async ({ test, url, selector } = {}) => {
     )
   }
 
-  if (result != inputTest) {
+  if (result == inputTest) {
+    console.log(`✓ ${inputSelector}: ${inputTest}`)
+  } else {
     core.setFailed(
       `Check failed: ${inputSelector} at ${inputUrl}, expected ${inputTest} but got ${result}`,
     )
